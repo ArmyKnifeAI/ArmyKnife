@@ -30,6 +30,7 @@ include Makefile.Go.mk
 include Makefile.Rust.mk
 include Makefile.MacOS.mk
 include Makefile.Ubuntu.mk
+include Makefile.Jetbrains.mk
 
 
 
@@ -65,6 +66,9 @@ help:
 	@echo "setup-common-tools      - Setup Common Tools"
 	@echo "setup-homebrew-tools    - Setup Homebrew Tools"
 	@echo "setup-registry          - Setup Docker Registry"
+	@echo "setup-bashlibs          - Setup Bash libraries"
+	@echo "setup-postgres          - Setup Postgres Database"
+	@echo "setup-jetbrains-toolbox - Setup JetBrains Toolbox"
 	@echo "--------------------------------------------------------"
 	@echo "Use \"make <target>\" to run a specific command."
 

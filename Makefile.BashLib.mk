@@ -10,7 +10,7 @@ MAIN_LIB = $(LIB_DIR)/main.sh
 EXAMPLE_SCRIPT = $(BIN_DIR)/example_script.sh
 
 # Default target
-all: setup-lib setup-bin setup-main setup-example
+setup-bashlibs: setup-lib setup-bin setup-main setup-example
 
 # Set up library directories
 setup-lib:
@@ -76,4 +76,4 @@ setup-example:
 	echo 'echo "Sum of 5 and 3: $$sum"' >> $(EXAMPLE_SCRIPT)
 	chmod +x $(EXAMPLE_SCRIPT)
 
-.PHONY: all setup-lib setup-bin setup-main setup-example
+.PHONY: setup-bashlibs setup-lib setup-bin setup-main setup-example

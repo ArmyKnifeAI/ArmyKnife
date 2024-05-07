@@ -12,9 +12,17 @@ PYCHARM_VERSION := 2021.3
 INTELLIJ_URL := https://download.jetbrains.com/idea/ideaIC-$(INTELLIJ_VERSION).tar.gz
 PYCHARM_URL := https://download.jetbrains.com/python/pycharm-professional-$(PYCHARM_VERSION).tar.gz
 
-.PHONY: all install_intellij install_pycharm
+.PHONY: setup-jetbrains-toolbox install_intellij install_pycharm
 
-all: install_intellij install_pycharm
+setup-jetbrains-toolbox:
+	@echo "Downloading JetBrains Toolbox..."
+	@curl -L "https://data.services.jetbrains.com/products/download?code=TBA&platform=linux" -o /tmp/jetbrains-toolbox.tar.gz
+	@echo "Extracting Toolbox..."
+	@sudo tar -xzf /tmp/jetbrains-toolbox.tar.gz -C /opt
+	@echo "Installing Toolbox..."
+	@sudo sh -c 'cd /opt/jetbrains-toolbox-* && ./jetbrains-toolbox'
+	@echo "Installation complete. You can now use JetBrains Toolbox to install and manage JetBrains applications."
+
 
 $(INSTALL_DIR):
 	mkdir -p $@
@@ -26,3 +34,6 @@ install_intellij: | $(INSTALL_DIR)
 # PyCharm Professional Edition
 install_pycharm: | $(INSTALL_DIR)
 	wget -O - $(PYCHARM_URL) | tar xz -C $(INSTALL_DIR)
+
+
+

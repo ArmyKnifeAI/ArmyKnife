@@ -1,7 +1,7 @@
 # This is in test phase right now. Use at your own risk.
 # This expects you to have postgreSQL installed already locally for test/dev
 
-.PHONY: set-password create-database create-user grant-all-to-user check-status start-service stop-service restart-service drop_db drop_user reset_password list_databases list_users list_permissions
+.PHONY: setup-postgres set-password create-database create-user grant-all-to-user check-status start-service stop-service restart-service drop_db drop_user reset_password list_databases list_users list_permissions
 
 DB_USER ?= postgres
 DB_PASSWORD ?= YourSuperStrongPassword
@@ -111,6 +111,16 @@ list_permissions:
 		echo "User $$username does not exist."; \
 	fi
 
+
+
+setup-postgres:
+	@echo "Updating package lists..."
+	@sudo apt update
+	@echo "Installing PostgreSQL and common DBA tools..."
+	@sudo apt install -y postgresql postgresql-contrib postgresql-client-common postgresql-client pgtop
+	@echo "Tools installed successfully."
+	@echo "Installation and configuration complete."
+	@figlet "PostgreSQL Setup Complete"
 
 
 
