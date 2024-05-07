@@ -6,6 +6,7 @@
 smoke-test:
 	@echo "Running smoke test..."
 	if [[ ! -e ~/.kube ]]; then mkdir ~/.kube; fi
+	mkdir ~/.kube
 	cp tools/kubespray/inventory/sample/artifacts/admin.conf ~/.kube/config
 	kubectl get nodes
 	kubectl get pods --all-namespaces

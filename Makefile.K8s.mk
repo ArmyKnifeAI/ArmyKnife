@@ -25,7 +25,7 @@ install-minikube:
 # Download and install Kubespray
 ################################################################################################################
 
-install-kubespray:
+setup-kubespray:
 	@echo "Downloading and starting Kubespray"
 	@$(MAKE) -d -f Makefile.K8s.mk kubespray-install
 	@echo "Kubespray install completed."
@@ -78,6 +78,7 @@ configure-minikube: check-tools-now
 kubespray-install:
 	@echo "Installing KubeSpray...Needs more testing after the cluster is already up."
 	if [ ! -d tools/kubespary ]; then cd tools && git clone https://github.com/kubernetes-sigs/kubespray.git; else echo "KubeSpray already installed"; fi
+	cd tools/kubespray && git fetch --all && git checkout release-2.24 || git checkout -b release-2.24 origin/release-2.24
 	cp Vagrantfile tools/kubespray/Vagrantfile
 	cd tools/kubespray && python3 -m venv .venv && sudo chmod 777 .venv && . .venv/bin/activate && pip3 install -r requirements.txt && vagrant up --provider virtualbox
 
