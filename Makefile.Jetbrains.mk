@@ -22,6 +22,7 @@ setup-jetbrains-toolbox:
 	@echo "Installing Toolbox..."
 	@sudo sh -c 'cd /opt/jetbrains-toolbox-* && ./jetbrains-toolbox'
 	@echo "Installation complete. You can now use JetBrains Toolbox to install and manage JetBrains applications."
+	@figlet -f slant "JetBrains Toolbox Installed"
 
 
 $(INSTALL_DIR):
