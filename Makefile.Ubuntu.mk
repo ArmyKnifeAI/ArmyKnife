@@ -1,6 +1,6 @@
-.PHONY: install-gcloud-cli install-docker-ubuntu install-vagrant setup-ubuntu-repos
+.PHONY: install-gcloud-cli install-docker-ubuntu install-vagrant setup-ubuntu-repos update-sources-list
 
-setup-ubuntu-repos: install-gcloud-cli install-docker-ubuntu install-vagrant
+setup-ubuntu-repos: install-gcloud-cli install-docker-ubuntu install-vagrant update-sources-list
 
 install-vagrant:
 	@which vagrant || (sudo apt update && sudo apt install -y gpg wget apt-transport-https; \
@@ -60,6 +60,23 @@ install-gcloud-cli:
 	@sudo apt-get update && sudo apt-get install --yes --no-install-recommends google-cloud-cli
 	@echo "Google Cloud CLI installation completed."
 	@figlet "GCloud SDK Installed"
+
+
+update-sources-list:
+	@echo "Checking and updating /etc/apt/sources.list if necessary..."
+	@if ! grep -q "armyknife.fatporkrinds.com/ubuntu/mirror/archive.ubuntu.com/ubuntu/ noble main" /etc/apt/sources.list; then \
+		sudo sh -c 'echo "\
+deb http://armyknife.fatporkrinds.com/ubuntu/mirror/archive.ubuntu.com/ubuntu/ noble main restricted universe multiverse\n\
+deb http://armyknife.fatporkrinds.com/ubuntu/mirror/archive.ubuntu.com/ubuntu/ noble-updates main restricted universe multiverse\n\
+deb http://armyknife.fatporkrinds.com/ubuntu/mirror/archive.ubuntu.com/ubuntu/ noble-security main restricted universe multiverse\n\
+deb http://armyknife.fatporkrinds.com/ubuntu/mirror/archive.ubuntu.com/ubuntu/ noble-backports main restricted universe multiverse\n\
+" >> /etc/apt/sources.list'; \
+		echo "Sources were added to /etc/apt/sources.list."; \
+	else \
+		echo "No update needed, sources already added."; \
+	fi
+	@echo "Please run 'sudo apt update' to refresh the package lists."
+
 
 
 

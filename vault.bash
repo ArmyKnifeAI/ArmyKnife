@@ -23,7 +23,7 @@ log_message() {
 
 vault_clean() {
   local output
-  output=$(docker-compose down --volumes --remove-orphans --rmi all 2>&1) || true
+  output=$(docker compose down --volumes --remove-orphans --rmi all 2>&1) || true
   log_message "Cleaning Vault artifacts sending output and errors to log file.\n$output"
 
   if [ $? -eq 0 ]; then
@@ -37,7 +37,7 @@ vault_clean() {
 
 vault_up() {
   log_message "Starting Vault."
-  docker-compose up -d vault 2>&1 || true
+  docker compose up -d vault 2>&1 || true
 
   if [ $? -eq 0 ]; then
     log_message "Vault is up and running successfully."

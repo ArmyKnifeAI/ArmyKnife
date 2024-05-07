@@ -2,23 +2,23 @@
 #!/bin/bash
 
 # Ensure Make is installed
-if ! command -v make &>/dev/null; then
-    echo "Make is not installed. Please install make to proceed."
-    # Provide guidance for installing make based on the OS
-    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-        echo "Try installing make using: sudo apt-get install -y make (for Debian/Ubuntu) or sudo yum install -y make (for CentOS/RHEL)"
-    elif [[ "$OSTYPE" == "darwin"* ]]; then
-        echo "Try installing make using: brew install make"
-    fi
-    exit 1
-fi
+# if ! command -v make &>/dev/null; then
+#     echo "Make is not installed. Please install make to proceed."
+#     # Provide guidance for installing make based on the OS
+#     if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+#         echo "Try installing make using: sudo apt-get install -y make (for Debian/Ubuntu) or sudo yum install -y make (for CentOS/RHEL)"
+#     elif [[ "$OSTYPE" == "darwin"* ]]; then
+#         echo "Try installing make using: brew install make"
+#     fi
+#     exit 1
+# fi
 
 # Copy over .bashrc or .zshrc if it doesn't exist depending on if MacOS or Linux.
-if [ "`uname`" = "Darwin" ]; then \
-    cp support/.zshrc ~/.zshrc; \
-else \
-    cp support/.bashrc ~/.bashrc; \
-fi
+# if [ "`uname`" = "Darwin" ]; then \
+#     cp support/.zshrc ~/.zshrc; \
+# else \
+#     cp support/.bashrc ~/.bashrc; \
+# fi
 
 
 
@@ -47,7 +47,10 @@ run_make_target() {
 }
 
 # Run necessary Make targets
-run_make_target setup-workstation
-# Add more targets as necessary
+run_make_target setup-ubuntu-repos
+run_make_target setup-noble
+run_make_target setup-common-tools
+run_make_target setup-homebrew-tools
+
 
 echo "Setup completed successfully."
