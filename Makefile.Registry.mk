@@ -9,7 +9,8 @@ REGISTRY_PORT := 5000
 OS := $(shell uname -s)
 
 # Default target
-all: create_dir setup_htpasswd run_registry login-registry
+setup-registry: create_dir setup_htpasswd run_registry login-registry
+	@figlet "Docker Registry Setup Complete"
 
 # Create directory for Docker registry credentials
 create_dir:
@@ -49,7 +50,7 @@ registry-clean:
 	@rm -rf $(HTPASSWD_FILE)
 	@echo "Cleaned up resources."
 
-.PHONY: all create_dir configure_docker_daemon setup_htpasswd run_registry clean start-after-reboot
+.PHONY: setup-registry create_dir configure_docker_daemon setup_htpasswd run_registry clean start-after-reboot
 
 
 

@@ -64,6 +64,7 @@ help:
 	@echo "setup-ubuntu-repos      - Setup APT Repositories"
 	@echo "setup-common-tools      - Setup Common Tools"
 	@echo "setup-homebrew-tools    - Setup Homebrew Tools"
+	@echo "setup-registry          - Setup Docker Registry"
 	@echo "--------------------------------------------------------"
 	@echo "Use \"make <target>\" to run a specific command."
 
