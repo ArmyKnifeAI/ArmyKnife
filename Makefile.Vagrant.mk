@@ -7,7 +7,7 @@ K8S_LOCATION := tools/kubespray
 BOX := jammy
 
 # Phony Targets
-.PHONY: all help up-vagrant destroy-vagrant ssh-vagrant status-vagrant
+.PHONY: all help up-vagrant destroy-vagrant ssh-vagrant status-vagrant setup-vagrant-ansible
 
 # Default Target
 all: up-vagrant ssh-vagrant status-vagrant
@@ -45,8 +45,9 @@ status-vagrant:
 # Setup Vagrant Boxes
 ################################################################################################################
 # Vagrant Commands Need to add the rest of the vagrant commands.
-vagrant-up:
+setup-vagrant-ansible:
 	@echo "Launching Vagrant boxes"
+	rm -rf tools/vagrant/.vagrant
 	@$(MAKE) -d -f Makefile.Vagrant.mk up-vagrant
 	@echo "Vagrant boxes launched."
 

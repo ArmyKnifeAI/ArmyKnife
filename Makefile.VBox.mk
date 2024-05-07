@@ -16,7 +16,7 @@ SUFFIX := $(shell date +%Y%m%d%H%M%S)
 
 
 # Phony targets for VM setup
-.PHONY: setup-vm create-vm-dir run-vbox-setup-script import-ovas
+.PHONY: setup-vbox-ansible create-vm-dir run-vbox-setup-script import-ovas
 
 ################################################################################################################
 # Create a Virtualbox from scratch
@@ -34,7 +34,7 @@ endif
 
 
 # Default target for setting up VM
-setup-vm: run-vbox-setup-script
+setup-vbox-ansible: run-vbox-setup-script
 
 connect-ansible:
 	@echo "Connecting to Ansible"
