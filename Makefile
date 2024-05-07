@@ -54,7 +54,7 @@ help:
 	@echo "install-kubespray       - Install Kubernetes Cluster complete with Masters/Etcd and Workers"
 	@echo "install-minikube        - Setup Kubernetes Test Environment"
 	@echo "connect-to-my-geodesic  - Connect to Geodesic ToolBox Shell"
-	@echo "build-custom-geodesic   - Build Geodesic Docker Image with Kali plugin"
+	@echo "setup-geodesic          - Build Geodesic Docker Image with Kali plugin"
 	@echo "setup-git               - Setup Git Configuration"
 	@echo "vagrant-up              - Launch Vagrant Box Jammy (Ansible)"
 	@echo "setup-jammy             - Install OS Packages and Tools"

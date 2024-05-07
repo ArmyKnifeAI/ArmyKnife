@@ -41,10 +41,12 @@ endif
 # Yes we have some duplication here. We will fix this later. LOL
 
 # Main target for building Geodesic
-build-custom-geodesic:
+setup-geodesic:
 	@echo "Building Geodesic"
 	@$(MAKE) -d -f Makefile.Geodesic.mk build-geodesic
 	@echo "Geodesic build completed."
+	@figlet "Geodesic Setup Complete"
+	@$(MAKE) -f Makefile.Geodesic.mk connect-to-geodesic
 
 
 connect-to-my-geodesic:
