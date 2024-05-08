@@ -1,17 +1,50 @@
-# Warning!! This script is not tested and should be used with caution.
 #!/bin/bash
 
-# Ensure Make is installed
-# if ! command -v make &>/dev/null; then
-#     echo "Make is not installed. Please install make to proceed."
-#     # Provide guidance for installing make based on the OS
-#     if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-#         echo "Try installing make using: sudo apt-get install -y make (for Debian/Ubuntu) or sudo yum install -y make (for CentOS/RHEL)"
-#     elif [[ "$OSTYPE" == "darwin"* ]]; then
-#         echo "Try installing make using: brew install make"
-#     fi
-#     exit 1
-# fi
+# Function to check and install missing packages
+install_package() {
+    local package=$1
+    local install_command=$2
+
+    if ! command -v $package &>/dev/null; then
+        echo "$package is not installed. Installing..."
+        eval $install_command
+        if [[ $? -ne 0 ]]; then
+            echo "Failed to install $package. Please install it manually."
+            exit 1
+        fi
+    fi
+}
+
+# OS-specific installation commands
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    install_package make "sudo apt-get install -y make || sudo yum install -y make"
+    install_package git "sudo apt-get install -y git || sudo yum install -y git"
+    install_package wget "sudo apt-get install -y wget || sudo yum install -y wget"
+    install_package curl "sudo apt-get install -y curl || sudo yum install -y curl"
+    install_package jq "sudo apt-get install -y jq || sudo yum install -y jq"
+    # Check for Python 3.12 and install if not available
+    if ! python3.12 --version &>/dev/null; then
+        echo "Python 3.12 is not installed. Installing..."
+        sudo apt-get install -y python3.12-venv || sudo yum install -y python3.12-venv
+    fi
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    install_package make "brew install make"
+    install_package git "brew install git"
+    install_package wget "brew install wget"
+    install_package curl "brew install curl"
+    install_package jq "brew install jq"
+    # Check for Python 3.12 and install if not available
+    if ! python3.12 --version &>/dev/null; then
+        echo "Python 3.12 is not installed. Installing..."
+        brew install python@3.12
+        # Setting up the python3.12 symlink if not set
+        ln -s /usr/local/bin/python3.12 /usr/local/bin/python3.12
+    fi
+else
+    echo "Unsupported OS. Please install the packages manually."
+    exit 1
+fi
+
 
 # Copy over .bashrc or .zshrc if it doesn't exist depending on if MacOS or Linux.
 # if [ "`uname`" = "Darwin" ]; then \
@@ -47,10 +80,12 @@ run_make_target() {
 }
 
 # Run necessary Make targets
-run_make_target setup-ubuntu-repos
+
 run_make_target setup-noble
+run_make_target setup-ubuntu-repos
 run_make_target setup-common-tools
 run_make_target setup-homebrew-tools
 
 
 echo "Setup completed successfully."
+

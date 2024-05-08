@@ -13,14 +13,16 @@ create-ssh-keys:
 # Define the target to install Oh My Zsh
 install-oh-my:
 	if [ "`uname`" = "Darwin" ]; then \
-        if [ ! -d "/Users/$(USER)/.oh-my-zsh" ]; then \
-            sh -c "$$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"; \
-        fi \
-    else \
-        if [ ! -d "/home/$(USER)/.oh-my-bash" ]; then \
-            bash -c "$$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"; \
-        fi \
-    fi
+		if [ ! -d "/Users/$$(whoami)/.oh-my-zsh" ]; then \
+			sh -c "$$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"; \
+		fi; \
+	else \
+		if [ ! -d "/home/$$(whoami)/.oh-my-bash" ]; then \
+			bash -c "$$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"; \
+			/bin/bash -c "source ~/.bashrc; $(MAKE) setup-common-tools"; \
+		fi; \
+	fi
+
 
 # Define the target to install amix/vimrc configuration for Vim
 install-amix-vimrc:
@@ -55,15 +57,19 @@ anaconda-download:
 		exit 1; \
 	fi
 
-anaconda-install: anaconda_download
+anaconda-install: anaconda-download
 	bash anaconda.sh -b -p $(HOME)/anaconda3
-	echo 'export PATH="~/anaconda3/bin:$PATH"' >> ~/.bashrc
-	@/bin/bash -c "source ~/.bashrc; $(MAKE) conda-setup"
+	echo 'export PATH="~/anaconda3/bin:$$PATH"' >> ~/.bashrc
+	/bin/bash -c "source ~/.bashrc; $(MAKE) conda-setup"
 
 
 conda-setup:
 	conda update -n base -c defaults conda; \
 	conda init bash; \
+
+
+
+
 
 
 

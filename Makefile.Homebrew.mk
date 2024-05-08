@@ -11,7 +11,7 @@ KUBERNETES_TOOLS := kubectl kustomize helm
 GITHUB_TOOLS := gh git-lfs git-secrets git-crypt git-extras git-flow git-gui
 DOTFILE_MANAGER := stow
 CLOUD_TOOLS := azure-cli awscli
-DEVOPS_TOOLS := devbox
+DEVOPS_TOOLS := argocd dagger crossplane cosign cue chainsaw go-task twingate teller k8sgpt k9s "stefanprodan/tap/timoni" gum kcp kyverno werf
 
 .PHONY: setup-homebrew-tools setup-homebrew install-common-packages install-kubernetes-tools install-github-cli setup-dotfile-manager install-cloud-tools install-essential-dev-tools install-packages
 

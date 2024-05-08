@@ -18,6 +18,6 @@ endif
 setup-noble-packages:
 	sudo apt remove -y minidlna
 	sudo apt autoremove -y
-	python3.12 -m venv env  
-	/bin/bash -c "source env/bin/activate; python -m pip install tqdm requests; python install_script.py '$(PACKAGES)' '$(DIDYOUKNOW)'"
+	python3.12 -m venv .venv  
+	/bin/bash -c "source .venv/bin/activate; python -m pip install tqdm requests; python install_script.py '$(PACKAGES)' '$(DIDYOUKNOW)'"
 	@figlet "Install Complete"
