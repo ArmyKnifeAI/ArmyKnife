@@ -57,16 +57,20 @@ export SSH_KEY_PATH="$HOME/.ssh/rsa_id"
 
 # Check if Brew is installed
 if ! command -v brew &>/dev/null; then
-    echo "Brew is not installed. Please run make setup-workstation to proceed."
-    exit 1
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 else
    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
 # Check if Go is installed
 if ! command -v go &>/dev/null; then
-    echo "Go is not installed. Please run make setup-workstation to proceed."
-    exit 1
+    export PATH="/usr/local/opt/go/bin:$PATH"
+    export GOPATH=$HOME/go
+    export GOBIN=$GOPATH/bin
+    export GOROOT="$(brew --prefix golang)/libexec"
+    export PATH=$PATH:$GOPATH/bin
+    export PATH=$PATH:$GOROOT/bin
+    export PATH=$PATH:/usr/local/opt/go/bin
 else
     export PATH="/usr/local/opt/go/bin:$PATH"
     export GOPATH=$HOME/go
@@ -79,15 +83,44 @@ fi
 
 # Check if Rust and Cargo are installed
 if ! command -v rustc &>/dev/null || ! command -v cargo &>/dev/null; then
-    echo "Rust or Cargo is not installed. Please run make setup-workstation to proceed."
-    exit 1
+    export PATH="/usr/local/opt/rust/bin:$PATH"
+    # Typically, the cargo bin directory is added to PATH
+    export PATH="$HOME/.cargo/bin:$PATH"
 else
     export PATH="/usr/local/opt/rust/bin:$PATH"
     # Typically, the cargo bin directory is added to PATH
     export PATH="$HOME/.cargo/bin:$PATH"
 fi
 
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
 
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
 
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
 
