@@ -24,7 +24,7 @@ setup-homebrew:
 		/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; \
 	fi
 	@echo 'eval "$$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.bashrc
-	@/bin/bash -c "source ~/.bashrc; $(MAKE) update-shell-config"
+	
 
 setup-homebrew-shell:
 	@/bin/bash -c "source ~/.bashrc; $(MAKE) continue-install"
@@ -61,34 +61,34 @@ install-essential-dev-tools:
 
 
 # Define the target to update .bashrc and .zshrc files with tool-specific settings
-update-shell-config:
-	@echo "Updating shell configuration..."
-	@if [ "$(shell uname)" = "Darwin" ]; then \
-		echo 'export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"' >> ~/.bashrc; \
-		echo 'export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"' >> ~/.zshrc; \
-		echo 'eval "$$(/usr/local/bin/brew shellenv)"' >> ~/.bashrc; \
-		echo 'eval "$$(/usr/local/bin/brew shellenv)"' >> ~/.zshrc; \
-	fi
-	@if [ -f "/home/$(USER)/.bashrc" ]; then \
-		sudo echo 'eval "$$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.bashrc; \
-	fi
-	@if [ -f "/home/$(USER)/.zshrc" ]; then \
-		sudo echo 'eval "$$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.zshrc; \
-	fi
-	@if [ ! -d "/home/linuxbrew/.linuxbrew/bin/go" ] && [ ! -d "/home/linuxbrew/.linuxbrew/bin/cargo" ]; then \
-		echo 'export GOPATH=$$HOME/go' >> ~/.bashrc; \
-		echo 'export GOPATH=$$HOME/go' >> ~/.zshrc; \
-		echo 'export GOBIN=$$GOPATH/bin' >> ~/.bashrc; \
-		echo 'export GOBIN=$$GOPATH/bin' >> ~/.zshrc; \
-		echo 'export GOROOT="$$(brew --prefix golang)/libexec"' >> ~/.bashrc; \
-		echo 'export GOROOT="$$(brew --prefix golang)/libexec"' >> ~/.zshrc; \
-		echo 'export PATH=$$PATH:$$GOPATH/bin' >> ~/.bashrc; \
-		echo 'export PATH=$$PATH:$$GOPATH/bin' >> ~/.zshrc; \
-		echo 'export PATH=$$PATH:$$GOROOT/bin' >> ~/.bashrc; \
-		echo 'export PATH=$$PATH:$$GOROOT/bin' >> ~/.zshrc; \
-		echo 'export PATH="$$HOME/.cargo/bin:$$PATH"' >> ~/.bashrc; \
-		echo 'export PATH="$$HOME/.cargo/bin:$$PATH"' >> ~/.zshrc; \
-	fi
+# update-shell-config:
+# 	@echo "Updating shell configuration..."
+# 	@if [ "$(shell uname)" = "Darwin" ]; then \
+# 		echo 'export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"' >> ~/.bashrc; \
+# 		echo 'export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"' >> ~/.zshrc; \
+# 		echo 'eval "$$(/usr/local/bin/brew shellenv)"' >> ~/.bashrc; \
+# 		echo 'eval "$$(/usr/local/bin/brew shellenv)"' >> ~/.zshrc; \
+# 	fi
+# 	@if [ -f "/home/$(USER)/.bashrc" ]; then \
+# 		sudo echo 'eval "$$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.bashrc; \
+# 	fi
+# 	@if [ -f "/home/$(USER)/.zshrc" ]; then \
+# 		sudo echo 'eval "$$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.zshrc; \
+# 	fi
+# 	@if [ ! -d "/home/linuxbrew/.linuxbrew/bin/go" ] && [ ! -d "/home/linuxbrew/.linuxbrew/bin/cargo" ]; then \
+# 		echo 'export GOPATH=$$HOME/go' >> ~/.bashrc; \
+# 		echo 'export GOPATH=$$HOME/go' >> ~/.zshrc; \
+# 		echo 'export GOBIN=$$GOPATH/bin' >> ~/.bashrc; \
+# 		echo 'export GOBIN=$$GOPATH/bin' >> ~/.zshrc; \
+# 		echo 'export GOROOT="$$(brew --prefix golang)/libexec"' >> ~/.bashrc; \
+# 		echo 'export GOROOT="$$(brew --prefix golang)/libexec"' >> ~/.zshrc; \
+# 		echo 'export PATH=$$PATH:$$GOPATH/bin' >> ~/.bashrc; \
+# 		echo 'export PATH=$$PATH:$$GOPATH/bin' >> ~/.zshrc; \
+# 		echo 'export PATH=$$PATH:$$GOROOT/bin' >> ~/.bashrc; \
+# 		echo 'export PATH=$$PATH:$$GOROOT/bin' >> ~/.zshrc; \
+# 		echo 'export PATH="$$HOME/.cargo/bin:$$PATH"' >> ~/.bashrc; \
+# 		echo 'export PATH="$$HOME/.cargo/bin:$$PATH"' >> ~/.zshrc; \
+# 	fi
 
 source-bashrc:
 	@/bin/bash -c "source ~/.bashrc"; \
