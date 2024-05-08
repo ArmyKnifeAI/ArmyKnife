@@ -1,6 +1,7 @@
-.PHONY: create-ssh-keys install-oh-my install-amix-vimrc install-conda anaconda_download anaconda_install
+.PHONY: create-ssh-keys install-oh-my install-amix-vimrc install-conda anaconda_download anaconda_install conda-setup
 
-setup-common-tools: install-oh-my create-ssh-keys install-amix-vimrc anaconda-install
+setup-common-tools: install-oh-my create-ssh-keys install-amix-vimrc anaconda-install conda-setup
+	figlet "Common Tools Setup"
 
 # Make sure you update the keys in vagrant and virtualbox cloud-init files
 create-ssh-keys:
@@ -10,18 +11,7 @@ create-ssh-keys:
 	figlet "SSH Keys Created"
 
 
-# Define the target to install Oh My Zsh
-install-oh-my:
-	if [ "`uname`" = "Darwin" ]; then \
-		if [ ! -d "/Users/$$(whoami)/.oh-my-zsh" ]; then \
-			sh -c "$$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"; \
-		fi; \
-	else \
-		if [ ! -d "/home/$$(whoami)/.oh-my-bash" ]; then \
-			bash -c "$$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"; \
-			/bin/bash -c "source ~/.bashrc; $(MAKE) setup-common-tools"; \
-		fi; \
-	fi
+
 
 
 # Define the target to install amix/vimrc configuration for Vim

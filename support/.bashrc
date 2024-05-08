@@ -1,3 +1,4 @@
+# Bash Template for Linux 
 # Enable the subsequent settings only in interactive sessions
 case $- in
   *i*) ;;
@@ -7,6 +8,7 @@ esac
 # Path to your oh-my-bash installation.
 export OSH="$HOME/.oh-my-bash"
 export VAULT_ADDR='http://127.0.0.1:8200'
+export PATH="~/anaconda3/bin:$PATH"
 # VAULT_TOKEN should be set securely or exported securely before this script runs
 
 # Main Bash Library
