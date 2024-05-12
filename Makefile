@@ -25,11 +25,13 @@ include Makefile.Postgres.mk
 include Makefile.Terraform2.mk 
 include Makefile.Jammy.mk
 include Makefile.Noble.mk
+include Makefile.Bookworm.mk
 include Makefile.Homebrew.mk
 include Makefile.Go.mk
 include Makefile.Rust.mk
 include Makefile.MacOS.mk
 include Makefile.Ubuntu.mk
+include Makefile.Debian.mk
 include Makefile.Jetbrains.mk
 
 
@@ -60,9 +62,11 @@ help:
 	@echo "setup-vagrant-ansible   - Launch Vagrant Box Jammy (Ansible)"
 	@echo "setup-jammy             - Install OS Packages and Tools for Jammy Ubuntu OS"
 	@echo "setup-noble             - Install OS Packages and Tools for Noble Ubuntu OS"
+	@echo "setup-bookworm          - Install OS Packages and Tools for Bookworm Debian OS ****"
 	@echo "setup-macos             - Install OS Packages and Tools for MacOS"
 	@echo "setup-vault             - Create Vault Server for Development"
 	@echo "setup-ubuntu-repos      - Setup APT Repositories"
+	@echo "setup-debian-repos      - Setup APT Repositories"
 	@echo "setup-common-tools      - Setup Common Tools"
 	@echo "setup-homebrew-tools    - Setup Homebrew Tools"
 	@echo "setup-registry          - Setup Docker Registry"

@@ -23,9 +23,9 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     install_package curl "sudo apt-get install -y curl || sudo yum install -y curl"
     install_package jq "sudo apt-get install -y jq || sudo yum install -y jq"
     # Check for Python 3.12 and install if not available
-    if ! python3.12-venv --version &>/dev/null; then
+    if ! python3.12 --version &>/dev/null; then
         echo "Python 3.12 is not installed. Installing..."
-        sudo apt install python3.12-venv -y || sudo yum install -y python3.12-venv
+        sudo apt install python3 python3-pip python3.11-venv -y || sudo apt install python3.12-venv -y
     fi
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     install_package make "brew install make"
@@ -45,11 +45,11 @@ else
     exit 1
 fi
 
-if [ "`uname`" = "Darwin" ]; then 
-    if [ ! -d "/Users/$(whoami)/.oh-my-zsh" ]; then 
+if [ "`uname`" = "Darwin" ]; then
+    if [ ! -d "/Users/$(whoami)/.oh-my-zsh" ]; then
         sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh) --unattended"
-    fi; 
-else 
+    fi;
+else
     if [ ! -d "/home/$(whoami)/.oh-my-bash" ]; then \
         bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh) --unattended"
     fi
@@ -92,7 +92,7 @@ run_make_target() {
 
 # Run necessary Make targets
 
-run_make_target setup-noble
+#run_make_target setup-noble
 #run_make_target setup-ubuntu-repos
 #run_make_target setup-common-tools
 #run_make_target setup-homebrew-tools

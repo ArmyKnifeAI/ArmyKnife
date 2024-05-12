@@ -1,6 +1,6 @@
 .PHONY: create-ssh-keys install-oh-my install-amix-vimrc install-conda anaconda_download anaconda_install conda-setup
 
-setup-common-tools: install-oh-my create-ssh-keys install-amix-vimrc anaconda-install conda-setup
+setup-common-tools: create-ssh-keys install-amix-vimrc anaconda-install conda-setup
 	figlet "Common Tools Setup"
 
 # Make sure you update the keys in vagrant and virtualbox cloud-init files
@@ -54,8 +54,8 @@ anaconda-install: anaconda-download
 
 
 conda-setup:
-	conda update -n base -c defaults conda; \
-	conda init bash; \
+	~/anaconda3/bin/conda update -n base -c defaults conda; \
+	~/anaconda3/bin/conda init bash; \
 
 
 
