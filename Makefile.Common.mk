@@ -51,7 +51,7 @@ anaconda-install: anaconda-download
 	bash anaconda.sh -b -p $(HOME)/anaconda3
 	echo 'export PATH="~/anaconda3/bin:$$PATH"' >> ~/.bashrc
 	/bin/bash -c "source ~/.bashrc; $(MAKE) conda-setup"
-
+	rm -rf anaconda.sh
 
 conda-setup:
 	~/anaconda3/bin/conda update -n base -c defaults conda; \

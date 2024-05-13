@@ -13,8 +13,8 @@ setup-git:
 	@echo "Git setup completed."
 
 setup-git-config:
-	cp support/gitignore_global ~/.gitignore_global
-	cp support/gitmessage ~/.gitmessage
+	cp support/gitignore_global $$HOME/.gitignore_global
+	cp support/gitmessage $$HOME/.gitmessage
 	git config --global user.name "$$(cat .env | grep USER_NAME | cut -d '=' -f2)"
 	git config --global user.email "$$(cat .env | grep EMAIL_ADDRESS | cut -d '=' -f2)"
 	git config --global init.defaultBranch main
