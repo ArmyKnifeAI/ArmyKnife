@@ -1,8 +1,8 @@
-.PHONY: install-gcloud-cli install-docker-debian install-vagrant setup-debian-repos 
+.PHONY: install-gcloud-cli-debian install-docker-debian install-vagrant-debian setup-debian-repos 
 
-setup-debian-repos: install-gcloud-cli install-docker-debian install-vagrant setup-vscode  
+setup-debian-repos: install-gcloud-cli-debian install-docker-debian install-vagrant-debian setup-vscode-debian  
 
-install-vagrant:
+install-vagrant-debian:
 	@which vagrant || (sudo apt update && sudo apt install -y gpg wget apt-transport-https; \
 	sudo wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg; \
 	sudo gpg --no-default-keyring --keyring /usr/share/keyrings/hashicorp-archive-keyring.gpg --fingerprint | grep -q "798A EC65 4E5C 1542 8C8E 42EE AA16 FCBC A621 E701"; \
@@ -34,7 +34,7 @@ install-docker-debian:
 	fi
 
 # Example 
-setup-vscode:
+setup-vscode-debian:
 	@echo "Installing Visual Studio Code..."
 	@wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
 	@sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
@@ -45,7 +45,7 @@ setup-vscode:
 	@echo "--------------------------------------------------------------------------------"
 	@figlet "VSCode Installed"
 
-install-gcloud-cli:
+install-gcloud-cli-debian:
 	@echo "Updating system and installing required packages..."
 	@sudo apt-get update && sudo apt-get install --yes --no-install-recommends \
 	  apt-transport-https \
