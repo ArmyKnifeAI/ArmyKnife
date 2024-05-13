@@ -58,11 +58,11 @@ Here is the short list of tools we are presenting in this platform. This will pr
 ### Prerequisites
 - Embrace the full ArmyKnife experience on Intel-based Mac or Ubuntu systems. While Arm-based Macs are compatible with most features, Virtualbox exclusions apply. Vagrant offers a seamless alternative for these cases.
 
-1. log in to your Docker Hub account so you can push images.
-2. Copy `env_sample to .env so that the makefiles can find your secrets file
-3. run make setup-workstation
-4. You may have to run make setup-workstation several times because of the configuration that is added to ~/.bashrc
-5. Reboot to enable docker and a few other settings.
-6. Run make help to run some of the tools
-7. Make sure to fill out your username and email before running make git-setup
-8. Working on documenting install orders so that dependencies are satisfied. For example, install the local docker registry before building docker images.
+1. Create a folder in your home called localprojects
+2. cd localprojects and git clone https://github.com/ArmyKnifeAI/ArmyKnife.git  (Fork if you want to maintain your own changes.)
+3. Run ./install.sh then source ~/.bashrc or close the terminal and start a new one to use the .bashrc template.
+4. run make setup-bookworm (Use the setup that matches your OS.)
+5. Run make help to view the install order so things get installed in the proper order. Pay attention to the step that says logout or reboot so docker will work for you.
+6. Reboot to enable docker and a few other settings.
+8. Make sure to fill out your username and email in the .env file before running, make git-setup
+
