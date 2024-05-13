@@ -1,6 +1,6 @@
-.PHONY: install-gcloud-cli install-docker-ubuntu install-vagrant setup-debian-repos 
+.PHONY: install-gcloud-cli install-docker-debian install-vagrant setup-debian-repos 
 
-setup-debian-repos: install-gcloud-cli install-docker-ubuntu install-vagrant setup-vscode  
+setup-debian-repos: install-gcloud-cli install-docker-debian install-vagrant setup-vscode  
 
 install-vagrant:
 	@which vagrant || (sudo apt update && sudo apt install -y gpg wget apt-transport-https; \
@@ -11,7 +11,7 @@ install-vagrant:
 	@figlet "Hashicorp Tools Installed"
 
 # Define the target to install Docker on Ubuntu
-install-docker-ubuntu:
+install-docker-debian:
 	# If docker is not installed then install it
 	@if ! command -v docker &>/dev/null; then \
 		echo "Adding Docker's official GPG key..."; \
@@ -24,7 +24,7 @@ install-docker-ubuntu:
 		echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian bookworm stable" | sudo tee /etc/apt/sources.list.d/docker.list; \
 		sudo apt-get update; \
 		echo "Installing Docker..."; \
-		sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose; \
+		sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin; \
 		sudo usermod -aG docker $$USER; \
 		echo "Please log out and back in to apply the necessary Docker group changes."; \
 		figlet "Docker Installed" ; \
