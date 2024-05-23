@@ -61,6 +61,7 @@ if [ "`uname`" = "Darwin" ]; then \
     exec bash; \
 else \
     cp support/.bashrc ~/.bashrc; \
+    cp support/.bash_aliases ~/.bash_aliases; \
     source ~/.bashrc; \
 fi
 
