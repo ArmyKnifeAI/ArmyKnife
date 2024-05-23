@@ -6,7 +6,7 @@ LOCALPROJECT := ~/localprojects/python_test_project
 ARMYKNIFE := ~/localprojects/ArmyKnife
 
 # Define the packages to be installed via Homebrew
-COMMON_PACKAGES := wget curl jq
+COMMON_PACKAGES := wget curl jq cargo
 KUBERNETES_TOOLS := kubectl kustomize helm
 GITHUB_TOOLS := gh git-lfs git-secrets git-crypt git-extras git-flow git-gui
 DOTFILE_MANAGER := stow

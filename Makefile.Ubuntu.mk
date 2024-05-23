@@ -1,6 +1,6 @@
 .PHONY: install-gcloud-cli install-docker-ubuntu install-vagrant setup-ubuntu-repos update-sources-list
 
-setup-ubuntu-repos: install-gcloud-cli install-docker-ubuntu install-vagrant update-sources-list 
+setup-ubuntu-repos: install-gcloud-cli install-docker-ubuntu install-vagrant update-sources-list setup-vscode
 
 install-vagrant:
 	@which vagrant || (sudo apt update && sudo apt install -y gpg wget apt-transport-https; \

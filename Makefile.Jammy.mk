@@ -12,12 +12,12 @@ ifeq ($(shell uname),Darwin)
 	@$(MAKE) -f Makefile.MacOS.mk setup-macos
 else
 	@echo "Running Ubuntu Noble setup"
-	@$(MAKE) -f Makefile.Noble.mk setup-noble-packages
+	@$(MAKE) -f Makefile.Jammy.mk setup-jammy-packages
 endif
 
 setup-jammy-packages:
 	sudo apt remove -y minidlna
 	sudo apt autoremove -y
-	python3.12 -m venv env  
-	/bin/bash -c "source env/bin/activate; python -m pip install tqdm requests; python install_script.py '$(PACKAGES)' '$(DIDYOUKNOW)'"
+	python3.10 -m venv env  
+	/bin/bash -c "source env/bin/activate; python3 -m pip install tqdm requests; python3 install_script.py '$(PACKAGES)' '$(DIDYOUKNOW)'"
 	@figlet "Install Complete"
