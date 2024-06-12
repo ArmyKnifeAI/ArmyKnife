@@ -11,7 +11,7 @@ venv:
 	test -d $(VENV_DIR) || python3 -m venv $(VENV_DIR)
 
 # Setup the virtual environment with necessary packages
-setup: venv
+setup-python: venv
 	$(PIP) install --upgrade pip
 	$(PIP) install -r requirements.txt
 	# Install development tools
@@ -49,7 +49,7 @@ clean-python:
 	find . -name "*.pyc" -exec rm {} \;
 	find . -name "__pycache__" -exec rm -r {} \;
 
-.PHONY: all venv setup install format python-lint test typecheck clean-python config
+.PHONY: all venv setup-python install format python-lint test typecheck clean-python config
 
 # Define the target for installing Python development tools (common for both)
 install-python-tools:
