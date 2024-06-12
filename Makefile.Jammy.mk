@@ -18,6 +18,7 @@ endif
 setup-jammy-packages:
 	sudo apt remove -y minidlna
 	sudo apt autoremove -y
+	sudo apt install python3.10-venv
 	python3.10 -m venv env  
 	/bin/bash -c "source env/bin/activate; python3 -m pip install tqdm requests; python3 install_script.py '$(PACKAGES)' '$(DIDYOUKNOW)'"
 	@figlet "Install Complete"
