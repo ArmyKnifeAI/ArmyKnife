@@ -18,9 +18,10 @@ setup-jetbrains-toolbox:
 	@echo "Downloading JetBrains Toolbox..."
 	@curl -L "https://data.services.jetbrains.com/products/download?code=TBA&platform=linux" -o /tmp/jetbrains-toolbox.tar.gz
 	@echo "Extracting Toolbox..."
-	@sudo tar -xzf /tmp/jetbrains-toolbox.tar.gz -C /opt
+	@mkdir -p /home/$$USER/jetbrains-toolbox
+	@tar -xzf /tmp/jetbrains-toolbox.tar.gz -C /home/$$USER/jetbrains-toolbox/
 	@echo "Installing Toolbox..."
-	@sudo sh -c 'cd /opt/jetbrains-toolbox-* && ./jetbrains-toolbox'
+	@sh -c '/home/$$USER/jetbrains-toolbox/jetbrains-toolbox-*/jetbrains-toolbox'
 	@echo "Installation complete. You can now use JetBrains Toolbox to install and manage JetBrains applications."
 	@figlet -f slant "JetBrains Toolbox Installed"
 
