@@ -6,7 +6,7 @@ define download_file
 	rm -f $(1)
 endef
 
-.PHONY: check-tools-now configure-minikube kubespray-install
+.PHONY: check-tools-now configure-minikube kubespray-install smoke-test-k8s
 
 # Deploy Cost Optimization Tool and get reports from it
 
@@ -31,7 +31,14 @@ setup-kubespray:
 	@echo "Kubespray install completed."
 
 
-
+smoke-test-k8s:
+	@echo "Running smoke test..."
+	if [[ ! -e ~/.kube ]]; then mkdir ~/.kube; fi
+	mkdir ~/.kube
+	cp tools/kubespray/inventory/sample/artifacts/admin.conf ~/.kube/config
+	kubectl get nodes
+	kubectl get pods --all-namespaces
+	kubectl cluster-info
 
 
 # Check for required tools and download if not present

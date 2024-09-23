@@ -71,6 +71,7 @@ help:
 	@echo "setup-jetbrains-toolbox - Setup JetBrains Toolbox"
 	@echo "setup-vbox-ansible      - Create a custom virtualbox VM (Linux Only)"
 	@echo "setup-kubespray         - Install Kubernetes Cluster complete with Masters/Etcd and Workers"
+	@echo "smoke-test-k8s          - Smoke Test Kubernetes Cluster"
 	@echo "setup-geodesic          - Build Geodesic Docker Image with Kali plugin"
 	@echo "install-minikube        - Setup Kubernetes Test Environment"
 	@echo "connect-to-geodesic     - Connect to Geodesic ToolBox Shell"
