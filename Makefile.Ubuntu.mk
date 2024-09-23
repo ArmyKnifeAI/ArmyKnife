@@ -1,6 +1,8 @@
-.PHONY: install-gcloud-cli install-docker-ubuntu install-vagrant setup-ubuntu-repos update-sources-list
+.PHONY: install-gcloud-cli install-docker-ubuntu install-vagrant setup-ubuntu-repos update-sources-list setup-vscode setup-virtualbox
 
-setup-ubuntu-repos: install-gcloud-cli install-docker-ubuntu install-vagrant setup-vscode
+setup-ubuntu-repos: install-gcloud-cli install-docker-ubuntu install-vagrant setup-vscode setup-virtualbox
+	@echo "--------------------------------------------------------------------------------"
+	@figlet "Ubuntu Repos Setup Complete"
 
 install-vagrant:
 	@which vagrant || (sudo apt update && sudo apt install -y gpg wget apt-transport-https; \
@@ -44,6 +46,15 @@ setup-vscode:
 	@sudo apt install -y code
 	@echo "--------------------------------------------------------------------------------"
 	@figlet "VSCode Installed"
+
+setup-virtualbox:
+	@echo "Installing VirtualBox 7.1 ..."
+	@wget -O- https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --yes --output /usr/share/keyrings/oracle-virtualbox-2016.gpg --dearmor
+	@sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/oracle-virtualbox-2016.gpg] https://download.virtualbox.org/virtualbox/debian jammy contrib" > /etc/apt/sources.list.d/virtualbox.list'
+	@wget https://download.virtualbox.org/virtualbox/7.1.0/virtualbox-7.1_7.1.0-164728~Ubuntu~jammy_amd64.deb -O ~/Downloads/virtualbox-7.1_7.1.0-164728~Ubuntu~jammy_amd64.deb
+	@sudo apt install -y ~/Downloads/virtualbox-7.1_7.1.0-164728~Ubuntu~jammy_amd64.deb
+	@echo "--------------------------------------------------------------------------------"
+	@figlet "Virtualbox 7.1 Installed"
 
 install-gcloud-cli:
 	@echo "Updating system and installing required packages..."
