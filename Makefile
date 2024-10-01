@@ -75,6 +75,7 @@ help:
 	@echo "setup-geodesic          - Build Geodesic Docker Image with Kali plugin"
 	@echo "install-minikube        - Setup Kubernetes Test Environment"
 	@echo "connect-to-geodesic     - Connect to Geodesic ToolBox Shell"
+	@echo "connect-to-vault        - Connect to Vault Shell"
 	@echo "setup-vagrant-ansible   - Launch Vagrant Box Jammy (Ansible)"
 	@echo "--------------------------------------------------------"
 	@echo "Use \"make <target>\" to run a specific command."
