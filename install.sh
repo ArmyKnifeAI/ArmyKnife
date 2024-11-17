@@ -23,9 +23,12 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     install_package curl "sudo apt-get install -y curl || sudo yum install -y curl"
     install_package jq "sudo apt-get install -y jq || sudo yum install -y jq"
     # Check for Python 3.12 and install if not available
-    if ! python3.12 --version &>/dev/null; then
-        echo "Python 3.12 is not installed. Installing..."
-        sudo apt install python3 python3-pip python3.11-venv -y || sudo apt install python3.12-venv -y
+    if ! python3.11 --version &>/dev/null; then
+        echo "Python 3.11 is not installed. Installing..."
+	sudo sudo apt-mark hold python3.11
+	sudo apt install python3.11-distutils
+        curl -sS https://bootstrap.pypa.io/get-pip.py | sudo python3.11
+        sudo apt install python3.11 python3.11-venv --allow-change-held-packages -y || sudo apt install python3.10-venv -y
     fi
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     install_package make "brew install make"
@@ -36,9 +39,9 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     # Check for Python 3.12 and install if not available
     if ! python3.12 --version &>/dev/null; then
         echo "Python 3.12 is not installed. Installing..."
-        brew install python@3.12
+        brew install python@3.11
         # Setting up the python3.12 symlink if not set
-        ln -s /usr/local/bin/python3.12 /usr/local/bin/python3.12
+        ln -s /usr/local/bin/python3.11 /usr/local/bin/python3.11
     fi
 else
     echo "Unsupported OS. Please install the packages manually."
