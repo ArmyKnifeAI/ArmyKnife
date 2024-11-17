@@ -5,6 +5,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/devopsdevelopmentplatform/repository.svg)](https://github.com/username/repository/issues)
 [![GitHub stars](https://img.shields.io/github/stars/devopsdevelopmentplatform/repository.svg)](https://github.com/username/repository/stargazers)
 
+## Currently fixing problem with new python version. Python 3.13 broke a few things. 
 
 ## Project for "Makefiles for Cloud/DevOps Engineers"
 
