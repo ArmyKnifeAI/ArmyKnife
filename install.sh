@@ -27,6 +27,10 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
         echo "Python 3.11 is not installed. Installing..."
 	curl https://pyenv.run | bash
     source ~/.bashrc
+    . ~/.bashrc
+    sudo apt update; sudo apt install build-essential libssl-dev zlib1g-dev \
+	libbz2-dev libreadline-dev libsqlite3-dev curl git \
+	libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev -y
     pyenv install 3.11.0
     pyenv global 3.11.0
     #sudo sudo apt-mark hold python3.11
