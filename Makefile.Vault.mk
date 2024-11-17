@@ -11,10 +11,7 @@ VAULT_TOKEN := $(echo .env | grep VAULT_TOKEN | cut -d '=' -f2)
 all: clean-vault vault-up init-vault notify-user
 
 
-setup-vault:
-	@echo "Setting up Vault"
-	./vault.bash
-	@$(MAKE) -f Makefile.Vault.mk connect-to-vault
+setup-vault: vault-clean vault-up init-vault connect-to-vault
 	@figlet "Vault Setup Complete"
 
 # connect-to-vault:
@@ -42,22 +39,22 @@ vault-up:
 	
 # Initialize vault (executes vault-init.sh inside the running container)
 init-vault:
-	cd tools/vault && docker cp ./vault-init.sh $(SERVICE):/vault/config/vault-init.sh
+	cd tools/vault && docker cp ./vault-init.sh devopsvault:/vault/config/vault-init.sh
 	chmod +x ./tools/vault/vault-init.sh
-	docker exec -it $(SERVICE) /bin/sh -c "/vault/config/vault-init.sh"
+	docker exec -it devopsvault /bin/sh -c "/vault/config/vault-init.sh"
 	
 vault-connect:
 	ifeq ($(shell uname), Darwin)
 		open -a Terminal /bin/zsh -c "docker exec -it devopsvault /bin/sh"
 	else
-		gnome-terminal -- /bin/bash -c "docker exec -it devopsvault /bin/sh"
+		docker exec -it devopsvault /bin/sh
 	endif
 
 connect-to-vault:
 ifeq ($(shell uname), Darwin)
 	osascript -e 'tell app "Terminal" to do script "docker exec -it devopsvault /bin/sh"'
 else
-	docker start devopsvault && gnome-terminal -- /bin/bash -c "docker exec -it devopsvault /bin/sh"
+	docker start devopsvault && docker exec -it devopsvault /bin/sh
 endif
 
 

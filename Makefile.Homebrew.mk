@@ -112,7 +112,9 @@ install-production-python:
 	brew unlink python@3.13
 	brew install --force python@3.11
 	brew link --force python@3.11
-	sudo ln -sf $(which python3.11) /usr/local/bin/python3
+	sudo update-alternatives --install /usr/bin/python3 python3 /home/linuxbrew/.linuxbrew/bin/python3.11 1
+	sudo update-alternatives --config python3
+	
 
 
 	
