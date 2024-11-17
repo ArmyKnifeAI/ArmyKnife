@@ -16,7 +16,7 @@ DEVOPS_TOOLS := argocd dagger crossplane cosign cue chainsaw go-task twingate te
 .PHONY: setup-homebrew-tools setup-homebrew install-common-packages install-kubernetes-tools install-github-cli setup-dotfile-manager install-cloud-tools install-essential-dev-tools install-packages
 
 # Full setup chain with proper environment handling
-setup-homebrew-tools: setup-homebrew setup-homebrew-shell 
+setup-homebrew-tools: setup-homebrew setup-homebrew-shell install-production-python
 
 setup-homebrew:
 	@if ! which brew >/dev/null 2>&1; then \
@@ -96,12 +96,6 @@ source-bashrc:
 
 developer-support-tools:
 	/home/linuxbrew/.linuxbrew/bin/cargo install ytop; \
-	/home/linuxbrew/.linuxbrew/bin/cargo install exa; \
-	/home/linuxbrew/.linuxbrew/bin/cargo install bat; \
-	/home/linuxbrew/.linuxbrew/bin/cargo install ripgrep; \
-	/home/linuxbrew/.linuxbrew/bin/cargo install fd-find; \
-	/home/linuxbrew/.linuxbrew/bin/cargo install tokei; \
-	/home/linuxbrew/.linuxbrew/bin/cargo install procs; \
 	/home/linuxbrew/.linuxbrew/bin/cargo install git-delta; \
 	/home/linuxbrew/.linuxbrew/bin/cargo install git-absorb; \
 	/home/linuxbrew/.linuxbrew/bin/cargo install git-interactive-rebase-tool; \
@@ -111,8 +105,15 @@ developer-support-tools:
 	/home/linuxbrew/.linuxbrew/bin/cargo install git-journal; \
 	/home/linuxbrew/.linuxbrew/bin/cargo install git-undo; \
 	/home/linuxbrew/.linuxbrew/bin/cargo install git-quick-stats; \
-	/home/linuxbrew/.linuxbrew/bin/cargo install cargo-edit ; \
 	figlet "Rust Developer Tools Installed"; \
+
+install-production-python:
+	brew unlink python@3.12
+	brew unlink python@3.13
+	brew install --force python@3.11
+	brew link --force python@3.11
+	sudo ln -sf $(which python3.11) /usr/local/bin/python3
+
 
 	
 
