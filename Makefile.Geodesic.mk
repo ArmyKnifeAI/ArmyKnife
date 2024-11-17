@@ -1,5 +1,3 @@
-# Makefile.Docker.mk
-
 # Variables
 IMAGE_NAME := localhost:5000/frisbee
 TAG := latest
@@ -31,7 +29,7 @@ connect-to-geodesic:
 ifeq ($(shell uname), Darwin)
 	osascript -e 'tell application "Terminal" to activate' -e 'tell application "Terminal" to do script "~/localprojects/ArmyKnife/community/bash/frisbee.sh"'
 else
-	gnome-terminal -- /bin/bash -c "community/bash/frisbee.sh"
+	./community/bash/frisbee.sh
 endif
 
 
