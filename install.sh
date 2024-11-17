@@ -25,10 +25,14 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # Check for Python 3.12 and install if not available
     if ! python3.11 --version &>/dev/null; then
         echo "Python 3.11 is not installed. Installing..."
-	sudo sudo apt-mark hold python3.11
-	sudo apt install python3.11-distutils
-        curl -sS https://bootstrap.pypa.io/get-pip.py | sudo python3.11
-        sudo apt install python3.11 python3.11-venv --allow-change-held-packages -y || sudo apt install python3.10-venv -y
+	curl https://pyenv.run | bash
+    source ~/.bashrc
+    pyenv install 3.11.0
+    pyenv global 3.11.0
+    #sudo sudo apt-mark hold python3.11
+	#sudo apt install python3.11-distutils
+    #    curl -sS https://bootstrap.pypa.io/get-pip.py | sudo python3.11
+    #    sudo apt install python3.11 python3.11-venv --allow-change-held-packages -y && sudo apt install python3.10-venv -y
     fi
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     install_package make "brew install make"

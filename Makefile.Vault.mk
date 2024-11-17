@@ -1,6 +1,6 @@
 
 
-.PHONY: vault-up vault-down vault-clean vault-connect ingest-secrets-into-vault test-vault-secret print-vault-secrets test-vault-login
+.PHONY: vault-up vault-down vault-clean vault-connect ingest-secrets-into-vault test-vault-secret print-vault-secrets test-vault-login setup-new-vault
 
 # Define variables
 SERVICE=devopsvault
@@ -11,7 +11,7 @@ VAULT_TOKEN := $(echo .env | grep VAULT_TOKEN | cut -d '=' -f2)
 all: clean-vault vault-up init-vault notify-user
 
 
-setup-vault: vault-clean vault-up init-vault connect-to-vault
+setup-new-vault: vault-clean vault-up init-vault connect-to-vault
 	@figlet "Vault Setup Complete"
 
 # connect-to-vault:
@@ -31,11 +31,11 @@ notify-user:
 
 # Stop the vault service
 vault-clean:
-	cd tools/vault && docker-compose down --volumes --remove-orphans --rmi all
+	cd tools/vault && docker compose down --volumes --remove-orphans --rmi all
 
 # Start the vault service using docker-compose
 vault-up:
-	cd tools/vault && docker-compose up -d vault
+	cd tools/vault && docker compose up -d vault
 	
 # Initialize vault (executes vault-init.sh inside the running container)
 init-vault:
@@ -87,10 +87,10 @@ test-vault-login:
 
 
 vault-down:
-	cd tools/vault && docker-compose down
+	cd tools/vault && docker compose down
 # Rebuild the vault service
 rebuild:
-	cd tools/vault && docker-compose up -d --build $(SERVICE)
+	cd tools/vault && docker compose up -d --build $(SERVICE)
 
 
 

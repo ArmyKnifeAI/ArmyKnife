@@ -13,7 +13,6 @@ export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export CONDA_AUTO_ACTIVATE_BASE=false
-export PATH="/home/linuxbrew/.linuxbrew/opt/python@3.11/bin:$PATH"
 
 # VAULT_TOKEN should be set securely or exported securely before this script runs
 
@@ -133,6 +132,8 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
- alias python='/home/linuxbrew/.linuxbrew/bin/python3.11'
- alias python3='/home/linuxbrew/.linuxbrew/bin/python3.11'
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 
