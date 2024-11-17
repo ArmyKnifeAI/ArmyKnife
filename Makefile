@@ -65,7 +65,7 @@ help:
 	@echo "Log out or Reboot at this point so docker works for you."
 	@echo "setup-git               - Edit .env with username and email then run make setup-git"
 	@echo "setup-registry          - Setup Docker Registry"
-	@echo "setup-vault             - Create Vault Server for Development"
+	@echo "setup-new-vault             - Create Vault Server for Development"
 	@echo "setup-bashlibs          - Setup Bash libraries"
 	@echo "setup-postgres          - Setup Postgres Database"
 	@echo "setup-jetbrains-toolbox - Setup JetBrains Toolbox"
