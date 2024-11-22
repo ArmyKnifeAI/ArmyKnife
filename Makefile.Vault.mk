@@ -41,6 +41,7 @@ vault-up:
 init-vault:
 	cd tools/vault && docker cp ./vault-init.sh devopsvault:/vault/config/vault-init.sh
 	chmod +x ./tools/vault/vault-init.sh
+	sleep 10
 	docker exec -it devopsvault /bin/sh -c "/vault/config/vault-init.sh"
 	
 vault-connect:
